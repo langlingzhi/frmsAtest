@@ -1,0 +1,21 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ExampleMapper">
+    <select id="findAll" resultType="Example">
+        select  id, name from example
+    </select>
+
+    <select id="selectIdForUpdate" parameterType="Example" resultType="Example" >
+        select id,name from example where id = #{id} for update
+    </select>
+
+    <update id="updateName" parameterType="Example" >
+        update example set name=#{name} where id = #{id}
+    </update>
+
+    <insert id="insert" parameterType="Example">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into example (name,code) values(#{name,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR});
+    </insert>
+

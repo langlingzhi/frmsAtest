@@ -1,0 +1,24 @@
+/* CSS Initializing */
+@charset "utf-8";
+* {
+    box-sizing:inherit;
+}
+/**login**/
+.body-main{}
+.login-box{padding-top:100px;}
+.login-form{background:rgba(228,239,246,0.9);border-radius:3px;border:1px solid #fff;width:370px;margin:56px auto;padding:50px 40px;}
+.login-form .input-mk .mks{background:#289cce;border:1px solid #fff;height:24px;line-height:24px;padding:10px 7px;border-radius:3px;}
+.login-form .input-mk .mks .userico,.login-form .input-mk .mks .keyico{display:inline-block;width:22px;height:24px; vertical-align:middle;padding:0 10px;border-right:1px solid #7ec4e2;}
+.login-form .input-mk .mks .userico{background:url(../images/userico.png) no-repeat center center;}
+.login-form .input-mk .mks .keyico{background:url(../images/keyico.png) no-repeat center center;}
+.login-form .input-mk .mks .inputtip{border:none;background:none;width:285px;min-height: 24px !important;
+    padding: 0 10px !important;height:24px;line-height:24px;color:#fff;}
+.login-form .input-mk .mks .inputtip:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #fff;  }
+
+.login-form .input-mk .mks .inputtip::-moz-placeholder { /* Mozilla Firefox 19+ */color: #fff;}
+
+.login-form .input-mk .mks .inputtip:-ms-input-placeholder {color: #fff;}
+
+.login-form .input-mk .mks .inputtip::-webkit-input-placeholder {color: #fff;}
+.login-form .input-mk .login-btn{font-size:18px;color:#fff;width:100%;border-radius:3px;border:1px solid #fff;background:#f8c00c;height:48px;cursor:pointer;}
+.login-form .input-mk .login-btn:hover{filter:alpha(opacity=70); /*IE滤镜，透明度50%*/-moz-opacity:0.7; /*Firefox私有，透明度50%*/opacity:0.7;}

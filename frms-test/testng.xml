@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="风控api自动化测试报告">
+    <test verbose="2" preserve-order="true" name="all接口">
+        <classes>
+            <class name="com.nuanshui.frms.test.testcase.apitest.apitest"></class>
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="com.nuanshui.frms.test.api.listeners.AutoTestListener"></listener>
+        <listener class-name="com.nuanshui.frms.test.api.listeners.RetryListener"></listener>
+        <listener class-name="com.nuanshui.frms.test.api.listeners.ExtentTestNGIReporterListener"/>
+
+    </listeners>
+</suite>

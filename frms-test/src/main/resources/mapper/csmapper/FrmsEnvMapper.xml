@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsEnvMapper" >
+    <insert id="insertfrmsenv" parameterType="com.nuanshui.frms.test.entity.cs.FrmsEnv" >
+
+        insert into frms_env (productname,envtest,envpro,protocol,status) values(#{productname},#{envtest},#{envpro},#{protocol},#{status});
+    </insert>
+    <select id="selectfrmsenv" resultType="com.nuanshui.frms.test.entity.cs.FrmsEnv" parameterType="com.nuanshui.frms.test.command.example.FrmsEnvCmd">
+        select id,productname,envtest,envpro,protocol,status from frms_env
+        <where>1=1
+            <if test="productname != '' and productname != null">
+                AND  productname = #{productname}
+            </if>
+            <if test="status != '' and status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.FrmsEnv" parameterType="java.lang.Integer">
+        select id,productname,envtest,envpro,protocol,status from frms_env where id=#{id};
+    </select>
+    <select id="selectAllProduct" resultType="com.nuanshui.frms.test.entity.cs.FrmsEnv" >
+        select id,productname,envtest,envpro,protocol,status from frms_env;
+    </select>
+    <select id="selectByStatus" resultType="com.nuanshui.frms.test.entity.cs.FrmsEnv">
+        select id,productname,envtest,envpro,protocol,status from frms_env where status='1';
+    </select>
+    <delete id="deletefrmsenv" parameterType="Integer" >
+        delete from frms_env where id=#{id};
+    </delete>
+    <update id="updatefrmsenv" parameterType="com.nuanshui.frms.test.entity.cs.FrmsEnv" >
+        update frms_env
+        set
+        productname=#{productname}, envtest = #{envtest} , envpro = #{envpro} , protocol=#{protocol} , status=#{status} where id = #{id}
+    </update>
+</mapper>

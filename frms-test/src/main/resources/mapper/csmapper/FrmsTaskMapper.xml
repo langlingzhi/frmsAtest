@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsTaskMapper">
+    <insert id="insertfrmstask" parameterType="com.nuanshui.frms.test.entity.cs.FrmsTask">
+        insert into frms_task (taskname,productid,env,report,jobcron,email,creater,create_time,update_time) values(#{taskname},#{productid},#{env},#{report},#{jobcron},#{email},#{creater},#{create_time},#{update_time});
+    </insert>
+    <select id="selectfrmstask" resultType="com.nuanshui.frms.test.entity.cs.FrmsTaskList"
+            parameterType="com.nuanshui.frms.test.command.example.FrmsTaskCmd">
+        select a.id,a.taskname,a.productid,b.productname,a.env,c.business_name AS
+        envname,a.jobcron,a.email,a.creater,a.create_time,a.update_time from frms_task a,frms_env b,frms_dictionary c
+        <where>1=1
+            AND a.productid=b.id AND a.env=c.business_no
+            <if test="productid != '' and productid != null">
+                AND productid = #{productid};
+            </if>
+        </where>
+    </select>
+    <select id="selectRunTask" resultType="com.nuanshui.frms.test.entity.cs.FrmsTask">
+        select id,taskname,productid,env,report,jobcron,email,creater,create_time,update_time from frms_task where jobcron!= '';
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.FrmsTask"
+            parameterType="java.lang.Integer">
+        select id,taskname,productid,env,report,jobcron,email,creater,create_time,update_time from frms_task where id=#{id};
+    </select>
+    <delete id="deletefrmstask" parameterType="Integer">
+        delete from frms_task where id=#{id};
+    </delete>
+    <update id="updatefrmstask" parameterType="com.nuanshui.frms.test.entity.cs.FrmsTask">
+        update frms_task
+        set
+        taskname=#{taskname}, productid = #{productid} , env = #{env} , report=#{report} , jobcron=#{jobcron},email=#{email},creater=#{creater},update_time=#{update_time} where id = #{id};
+    </update>
+    <select id="selectfrmstaskname" resultType="com.nuanshui.frms.test.entity.cs.FrmsTask">
+        select taskname from frms_task;
+    </select>
+    <insert id="updatefrmstaskrun" parameterType="com.nuanshui.frms.test.entity.cs.FrmsTask">
+        update frms_task
+        set
+        jobcron=#{jobcron},email=#{email} where id = #{id};
+    </insert>
+</mapper>

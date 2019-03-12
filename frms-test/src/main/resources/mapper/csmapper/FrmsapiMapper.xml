@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsapiMapper" >
+    <insert id="insertfrmsapi" parameterType="com.nuanshui.frms.test.entity.cs.Frmsapi" >
+
+        insert into frms_api (id,apiName,productId,status,reqType,method,path,apiVersion,writer,discribe,paramType,body,susResponse,falResponse,create_time,update_time)
+        values(#{id},#{apiName},#{productId},#{status},#{reqType},#{method},#{path},#{apiVersion},#{writer},#{discribe},#{paramType},#{body},#{susResponse},#{falResponse},#{create_time},#{update_time});
+    </insert>
+    <select id="selectfrmsapi" resultType="com.nuanshui.frms.test.entity.cs.Frmsapi" parameterType="com.nuanshui.frms.test.command.example.FrmsapiCmd">
+        select id,apiName,productId,path,status,update_time from frms_api
+        <where>1=1
+        <if test="apiName != '' and apiName != null">
+          AND  apiName = #{apiName}
+        </if>
+        <if test="status != '' and status != null">
+           AND status = #{status}
+        </if>
+        <if test="productId != '' and productId != null">
+                AND productId = #{productId}
+        </if>
+
+        </where>
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.Frmsapi" parameterType="Integer">
+        select id,apiName,productId,status,reqType,method,path,apiVersion,writer,discribe,paramType,body,susResponse,falResponse,create_time,update_time from frms_api where id=#{id};
+    </select>
+    <select id="selectByStatus" resultType="com.nuanshui.frms.test.entity.cs.Frmsapi">
+        select id,apiName,productId,status,reqType,method,path,apiVersion,writer,discribe,paramType,body,susResponse,falResponse,create_time,update_time from frms_api where status='1';
+    </select>
+    <delete id="deletefrmsapi" parameterType="Integer" >
+        delete from frms_api where id=#{id};
+    </delete>
+    <update id="updatefrmsapi" parameterType="com.nuanshui.frms.test.entity.cs.Frmsapi" >
+        update frms_api
+        setl
+        apiName=#{apiName}, productId = #{productId} , status = #{status} , reqType=#{reqType} , method=#{method} , path=#{path} ,apiVersion=#{apiVersion},writer=#{writer},discribe=#{discribe},paramType=#{paramType},body=#{body},susResponse=#{susResponse},falResponse=#{falResponse},create_time=#{create_time},update_time=#{update_time} where id = #{id}
+    </update>
+
+</mapper>

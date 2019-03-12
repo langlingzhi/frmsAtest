@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <springProperty scope="context" name="projectName" source="spring.application.name" defaultValue="frms-message"/>
+    <springProperty scope="context" name="logPath" source="logging.path" defaultValue="log"/>
+
+    <property name="smtpHost" value="smtp.exmail.qq.com" />
+    <property name="username" value="frms@heatedloan.com" />
+    <property name="email_to" value="zhangzhenqiang@heatedloan.com,chenguichao@heatedloan.com,guoyaowen@heatedloan.com,liuliming@heatedloan.com,xingshi@heatedloan.com" />
+    <property name="password" value="56hfr49hbg%TGB&amp;UJMfyj" />
+    <property name="SSL" value="true" />
+    <property name="email_subject" value="【${projectName}生产engine出现异常预警】，请及时查看服务器状态-LOGBACK- %logger" />
+    <property name="smtpPort" value="465" />
+
+
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <!--local 日志配置 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}${projectName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}${projectName}zip\${projectName}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- EMAIL -->
+    <appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+        <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+            <marker>sendMail</marker>
+        </evaluator>
+        <smtpHost>${smtpHost}</smtpHost>
+        <Username>${username}</Username>
+        <Password>${password}</Password>
+        <SSL>${SSL}</SSL>
+        <to>${email_to}</to>
+        <from>${username}</from>
+        <smtpPort>${smtpPort}</smtpPort>
+        <subject>${email_subject}</subject>
+        <asynchronousSending>true</asynchronousSending>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %X{ip}  %-5level %logger{35} - %message%n</pattern>
+        </layout>
+    </appender>
+
+    <springProfile name="dev,job,test,local">
+        <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+            <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+            <encoder>
+                <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- TRICK! but I don't want to reset default ExceptionResolver! see AbstractHandlerExceptionResolver.setWarnLogCategory -->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="info"/>
+    <root level="info">
+        <appender-ref ref="file"/>
+        <springProfile name="dev,job,test,local">
+            <appender-ref ref="stdout"/>
+        </springProfile>
+        <springProfile name="product">
+            <appender-ref ref="email"/>
+        </springProfile>
+    </root>
+</configuration>

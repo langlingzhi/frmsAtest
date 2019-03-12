@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsVparamMapper" >
+    <insert id="insertfrmsvparam" parameterType="com.nuanshui.frms.test.entity.cs.FrmsVparam" >
+
+        insert into frms_vparam (caseid,paramKey,paramType,pramValue) values(#{caseid},#{paramKey},#{paramType},#{pramValue});
+    </insert>
+    <select id="selectfrmsvparamBycaseid" resultType="com.nuanshui.frms.test.entity.cs.FrmsVparam" parameterType="java.lang.Integer">
+        select id,caseid,paramKey,paramType,pramValue FROM frms_vparam where caseid=#{caseid};
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.FrmsVparam" parameterType="java.lang.Integer">
+        select id,caseid,paramKey,paramType,pramValue from frms_vparam where id=#{id};
+    </select>
+    <delete id="deletefrmsvparam" parameterType="Integer" >
+        delete from frms_vparam where id=#{id};
+    </delete>
+    <delete id="deletefrmsvparambycaseid" parameterType="Integer">
+        delete from frms_vparam where caseid=#{caseid};
+    </delete>
+    <update id="updatefrmvparam" parameterType="com.nuanshui.frms.test.entity.cs.FrmsVparam" >
+        update frms_vparam
+        set
+        caseid=#{caseid}, paramKey = #{paramKey} , paramType = #{paramType} , pramValue=#{pramValue} where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,40 @@
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+logging:
+  level:
+    root: info
+    com.nuanshui: debug
+    org.apache: info
+    org.hibernate: error
+spring:
+    mail:
+      host: smtp.qq.com
+      username: 1737477724@qq.com
+      password: oresiapblmzjeiee
+      default-encoding: UTF-8
+      to: 1737477724@qq.com
+      subject: 提醒邮件
+      mailTemplate: report.ftl
+      ccList: lianglingzhi@heatedloan.com
+
+
+#spring:
+#  mail:
+#    host: smtp.qq.com
+#    username: 1737477724@qq.com
+#    password: oresiapblmzjeiee
+#    default-encoding:  utf-8
+#    properties:
+#        mail:
+#        smtp:
+#            auth: true
+#            timeout: 25000
+
+

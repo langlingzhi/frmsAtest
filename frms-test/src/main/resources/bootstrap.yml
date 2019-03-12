@@ -1,0 +1,27 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host}:8761/eureka/${cloud.eureka.host2:}
+
+spring:
+  cloud:
+     config:
+       discovery:
+          enabled: true
+          service-id: frms-config
+  profiles:
+    active: dev
+  application:
+    name: frms-test
+server:
+  port: 21300
+  tomcat:
+    max-threads: 1000
+
+cloud:
+  eureka:
+    host: 127.0.0.1
+    registryFetchIntervalSeconds: 50
+
+logging:
+  path: ../logs/

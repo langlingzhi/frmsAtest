@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.appmapper.PayOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.nuanshui.frms.test.entity.app.PayOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="mix_card_no" property="mixCardNo" jdbcType="VARCHAR" />
+    <result column="repay_mix_card_no" property="repayMixCardNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+    <result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="borrow_type" property="borrowType" jdbcType="INTEGER" />
+    <result column="load_days" property="loadDays" jdbcType="INTEGER" />
+    <result column="overdue_fee" property="overdueFee" jdbcType="BIGINT" />
+    <result column="remission_fee" property="remissionFee" jdbcType="BIGINT" />
+    <result column="base_rate" property="baseRate" jdbcType="INTEGER" />
+    <result column="interest_rate" property="interestRate" jdbcType="INTEGER" />
+    <result column="overdue_days" property="overdueDays" jdbcType="INTEGER" />
+    <result column="approved_time" property="approvedTime" jdbcType="TIMESTAMP" />
+    <result column="lend_time" property="lendTime" jdbcType="TIMESTAMP" />
+    <result column="should_return_time" property="shouldReturnTime" jdbcType="TIMESTAMP" />
+    <result column="retrun_time" property="retrunTime" jdbcType="TIMESTAMP" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="reject_context" property="rejectContext" jdbcType="VARCHAR" />
+    <result column="failure_context" property="failureContext" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="loan_channel" property="loanChannel" jdbcType="VARCHAR" />
+    <result column="new_old_sign" property="newOldSign" jdbcType="VARCHAR" />
+    <result column="load_period" property="loadPeriod" jdbcType="INTEGER" />
+    <result column="payment_failure_reason" property="paymentFailureReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, mix_card_no, repay_mix_card_no, order_no, order_amount, loan_amount, 
+    order_status, borrow_type, load_days, overdue_fee, remission_fee, base_rate, interest_rate, 
+    overdue_days, approved_time, lend_time, should_return_time, retrun_time, created_at, 
+    updated_at, reject_context, failure_context, phone, loan_channel, new_old_sign, load_period, 
+    payment_failure_reason
+  </sql>
+   <select id="selectByUserIdIfOverdue90Days" parameterType="com.nuanshui.frms.test.entity.app.PayOrder" resultType="com.nuanshui.frms.test.entity.app.PayOrder">
+         select
+         <include refid="Base_Column_List"/>
+         from
+         pay_order
+         WHERE  user_id=#{userId}
+                and borrow_type in(1,2)
+                and should_return_time is NOT  NULL
+                and order_no !=#{orderNo}
+                and SUBDATE(#{createdAt,jdbcType=TIMESTAMP},90) &lt;= should_return_time  and should_return_time &lt;= #{createdAt,jdbcType=TIMESTAMP};
+
+   </select>
+  <select id="selectByUserId" parameterType="com.nuanshui.frms.test.entity.app.PayOrder" resultType="com.nuanshui.frms.test.entity.app.PayOrder">
+      select
+      <include refid="Base_Column_List"/>
+      from
+      pay_order
+      WHERE user_id=#{userId}
+  </select>
+    <select id="selectByUserIdExceptCurrentOrderId" parameterType="com.nuanshui.frms.test.entity.app.PayOrder" resultType="com.nuanshui.frms.test.entity.app.PayOrder">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        pay_order
+        WHERE user_id=#{userId} and overdue_days &gt; 3;
+    </select>
+    <select id="selectByUserIdSerialDays" parameterType="com.nuanshui.frms.test.entity.app.PayOrder" resultType="java.lang.Integer">
+        select
+         count(*)
+        from
+        pay_order
+        WHERE user_id=#{userId} and order_no !=#{orderNo} and borrow_type=#{borrowType} and retrun_time is not null ;
+    </select>
+    <select id="selectByUserIdForUnclearedOrder" parameterType="com.nuanshui.frms.test.entity.app.PayOrder" resultType="java.lang.Integer">
+        select
+        count(*)
+        from
+        pay_order
+        WHERE user_id=#{userId} and order_no !=#{orderNo} and order_status in (5,6);
+    </select>
+
+</mapper>

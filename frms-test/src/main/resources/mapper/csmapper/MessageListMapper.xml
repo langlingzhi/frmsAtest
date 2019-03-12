@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.MessageListMapper" >
+    <insert id="getMessageList" parameterType="com.nuanshui.frms.test.entity.cs.MessageList" >
+        insert into message_list (message_order_no,order_no,loan_person,telphone,dispatch_user,message_content,message_source) values(#{message_order_no},#{order_no},#{loan_person},#{telphone},#{dispatch_user},#{message_content},#{message_source});
+    </insert>
+    <select id="searchMessageList" resultType="com.nuanshui.frms.test.entity.cs.MessageList">
+        select * from message_list;
+    </select>
+</mapper>

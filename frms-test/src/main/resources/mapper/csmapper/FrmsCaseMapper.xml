@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsCaseMapper">
+    <insert id="insertfrmscase" parameterType="com.nuanshui.frms.test.entity.cs.FrmsCase">
+        insert into frms_case (apiid,caseid,casename,requestparam,expstatus,verifyobj,spendtime,relstatus,relresponse,expresponse,verifyresult,log,status,create_time,update_time) values(#{apiid},#{caseid},#{casename},#{requestparam},#{spendtime},#{relstatus},#{relresponse},#{expstatus},#{expresponse},#{verifyobj},#{verifyresult},#{log},#{status},#{create_time},#{update_time});
+    </insert>
+    <select id="selectfrmscase" resultType="com.nuanshui.frms.test.entity.cs.FrmsCaseList"
+            parameterType="com.nuanshui.frms.test.command.example.FrmsCaseCmd">
+        select
+        a.id AS id,a.caseid AS caseid,a.casename AS casename,b.apiName AS apiName,a.requestparam AS
+        requestparam,a.expstatus AS expstatus,a.verifyobj AS verifyobj ,a.update_time AS update_time,a.verifyresult AS
+        verifyresult
+        from frms_case a,frms_api b
+        <where>1=1
+            AND a.apiid=b.id
+            <if test="apiid != '' and apiid != null">
+                AND apiid = #{apiid}
+            </if>
+            <if test="casename != '' and casename != null">
+                AND casename = #{casename}
+            </if>
+            <if test="status != '' and status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="selectfrmscaselog" resultType="com.nuanshui.frms.test.entity.cs.FrmsCase" parameterType="Integer">
+        select id,caseid,casename,spendtime,relstatus,relresponse,expstatus,verifyobj,verifyresult,log from frms_case where id=#{id};
+    </select>
+    <select id="selectRunfrmscase" resultType="com.nuanshui.frms.test.entity.cs.FrmsCaseList"
+            parameterType="com.nuanshui.frms.test.command.example.FrmsCaseCmd">
+        select
+        a.id AS id,a.caseid AS caseid,a.casename AS casename,b.apiName AS apiname,c.productname AS productname,a.verifyobj AS verifyobj,a.status AS status
+        from frms_case a,frms_api b,frms_env c where a.apiid=b.id AND c.id=b.productid;
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.FrmsCase" parameterType="Integer">
+        select id,caseid,apiid,casename,spendtime,requestparam,relstatus,relresponse,expstatus,expresponse,verifyobj,verifyresult,log,status,create_time,update_time from frms_case where id=#{id};
+    </select>
+    <select id="selectCasesbyproductid" resultType="com.nuanshui.frms.test.entity.cs.FrmsCase" parameterType="Integer">
+     select * from frms_case a INNER JOIN  frms_api b  where a.apiid=b.id AND b.productId=#{productId};
+    </select>
+    <select id="selectAllCase" resultType="com.nuanshui.frms.test.entity.cs.FrmsCase">
+        select apiid,caseid,casename,requestparam,spendtime,relstatus,relresponse,expstatus,expresponse,verifyobj,verifyresult,log,status,create_time,update_time from frms_case where status='1';
+    </select>
+    <delete id="deletefrmscase" parameterType="Integer">
+        delete from frms_case where caseid=#{caseid};
+    </delete>
+    <update id="updatefrmscase" parameterType="com.nuanshui.frms.test.entity.cs.FrmsCase">
+        update frms_case
+        set
+        apiid=#{apiid}, casename = #{casename} , caseid = #{caseid} , requestparam = #{requestparam} , spendtime=#{spendtime},relstatus=#{relstatus} , relresponse=#{relresponse} , expstatus=#{expstatus} ,expresponse=#{expresponse},verifyobj=#{verifyobj},verifyresult=#{verifyresult},log=#{log} where id = #{id}
+    </update>
+    <select id="selectmaxcaseid" resultType="Integer">
+     select MAX(caseid)+1 from frms_case;
+    </select>
+
+</mapper>

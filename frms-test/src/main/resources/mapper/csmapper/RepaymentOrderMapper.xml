@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.RepaymentOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.nuanshui.frms.test.entity.cs.RepaymentOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="mix_card_no" property="mixCardNo" jdbcType="VARCHAR" />
+    <result column="repay_mix_card_no" property="repayMixCardNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+    <result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+    <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="borrow_type" property="borrowType" jdbcType="INTEGER" />
+    <result column="load_days" property="loadDays" jdbcType="INTEGER" />
+    <result column="overdue_fee" property="overdueFee" jdbcType="BIGINT" />
+    <result column="base_rate" property="baseRate" jdbcType="INTEGER" />
+    <result column="interest_rate" property="interestRate" jdbcType="INTEGER" />
+    <result column="overdue_days" property="overdueDays" jdbcType="INTEGER" />
+    <result column="approved_time" property="approvedTime" jdbcType="TIMESTAMP" />
+    <result column="lend_time" property="lendTime" jdbcType="TIMESTAMP" />
+    <result column="should_return_time" property="shouldReturnTime" jdbcType="TIMESTAMP" />
+    <result column="retrun_time" property="retrunTime" jdbcType="VARCHAR" />
+    <result column="reject_context" property="rejectContext" jdbcType="VARCHAR" />
+    <result column="failure_context" property="failureContext" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="loan_channel" property="loanChannel" jdbcType="VARCHAR" />
+    <result column="new_old_sign" property="newOldSign" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="update_by" property="updateBy" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, mix_card_no, repay_mix_card_no, order_no, order_amount, loan_amount, 
+    order_status, borrow_type, load_days, overdue_fee, base_rate, interest_rate, overdue_days, 
+    approved_time, lend_time, should_return_time, retrun_time, reject_context, failure_context, 
+    phone, loan_channel, new_old_sign, CREATE_DATE, UPDATE_DATE, create_by, update_by
+  </sql>
+  
+  <select id="queryExpRepaymentOrder" parameterType="com.nuanshui.frms.test.entity.cs.RepaymentOrder" resultType="com.nuanshui.frms.test.entity.cs.RepaymentOrder">
+    select
+    a.id as id,
+    a.order_no as orderNo,
+    a.customerName as customerName,
+    a.pay_amt as orderAmount,
+    a.regist_phone as phone,
+    date_format(a.pay_time, '%Y-%m-%d %H:%i:%s') as retrunTime,
+    b.name as urgeName
+    from entrust_order a
+    left join sys_user b
+    on a.dispatch_user = b.no
+    <where>
+      and pay_time is not null
+      and pay_amt != 0
+      and pay_status='1'
+      <if test="lotNum!=null and lotNum!=''">
+        and a.lot_num = #{lotNum}
+      </if>
+    </where>
+    ORDER BY lot_num desc,retrunTime desc
+  </select>
+
+
+</mapper>

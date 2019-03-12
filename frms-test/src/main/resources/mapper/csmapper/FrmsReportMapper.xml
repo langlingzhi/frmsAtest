@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nuanshui.frms.test.csmapper.FrmsReportMapper" >
+    <insert id="insertfrmsreport" parameterType="com.nuanshui.frms.test.entity.cs.FrmsReport" >
+        insert into frms_report (reportId,testName,testPass,testFail,testSkip,testAll,beginTime,totalTime,testResult,create_time) values(#{reportId},#{testName},#{testPass},#{testFail},#{testSkip},#{testAll},#{beginTime},#{totalTime},#{testResult},#{create_time});
+    </insert>
+    <select id="selectfrmsreport" resultType="com.nuanshui.frms.test.entity.cs.FrmsReport" parameterType="com.nuanshui.frms.test.command.example.FrmsReportCmd">
+        select id,reportId,testName,testPass,testFail,testSkip,testAll,beginTime,totalTime,create_time from frms_report
+        <where>1=1
+            <if test="testName != '' and testName != null">
+                AND  testName = #{testName}
+            </if>
+        </where>
+        Order By create_time Desc;
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.nuanshui.frms.test.entity.cs.FrmsReport" parameterType="java.lang.Integer">
+        select id,reportId,testName,testPass,testFail,testSkip,testAll,beginTime,totalTime,testResult,create_time from frms_report where id=#{id};
+    </select>
+    <select id="selectByReportId" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select id from frms_report where reportId=#{reportId};
+    </select>
+</mapper>

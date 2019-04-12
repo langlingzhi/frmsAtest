@@ -23,3 +23,6 @@ TestApplication启动无误后，直接访问http://localhost:21300/就能访问
 - 支持在线加解密
 - 批量导入接口/测试用例
 - 待加+++++
+##
+以上~
+详细讲解请见我的同名[简书](https://www.jianshu.com/u/e02af7dce116)

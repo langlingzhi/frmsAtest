@@ -1,4 +1,4 @@
-一个java实现的简单接口测试平台
+#一个java实现的简单接口测试平台
 技术栈：springboot+restassured
 ##
 功能介绍：
@@ -14,7 +14,7 @@
 springboot支持以Application的方式启动（不同的模块有不同的application文件）,
 在idea中分别添加EurekaApplication，ConfigApplication，TestApplication，然后依次启动就能访问我们的接口测试平台了；
 ## 访问和使用
-TestApplication启动无误后，直接访问http://localhost:21300/就能访问该平台了
+TestApplication启动无误后，直接访问http://localhost:21300/     就能访问该平台了
 如需使用自己的数据库，请先在frms-config项目中填写数据库地址，且新建数据库和表；
 ## 待优化
 - 支持复杂接口的请求（全局cookie，sign等参数的添加）

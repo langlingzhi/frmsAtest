@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Setter
 @Getter

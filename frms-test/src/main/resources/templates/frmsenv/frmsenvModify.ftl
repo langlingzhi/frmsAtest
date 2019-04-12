@@ -16,9 +16,9 @@
                 var productname=$("input[name='productname']").val();
                 var envtest=$("input[name='envtest']").val();
                 var envpro=$("input[name='envpro']").val();
-                var protocol = document.getElementById("protocol").value;
+//                var protocol = document.getElementById("protocol").value;
                 var status = document.getElementById("status").value;
-                if(id != "" && productname!= ""&& protocol!=""  && status!="" ){
+                if(id != "" && productname!= ""  && status!="" ){
                     //不能重复点击
                     $("#editButton").attr("class","layui-btn layui-btn-disabled");
                     $("#editButton").attr("lay-filter","editButton");
@@ -28,7 +28,7 @@
                         async:'true',
                         type:'post',
                         contentType:'application/json',
-                        data:JSON.stringify({id:id,productname:productname,envtest:envtest,envpro:envpro,protocol:protocol,status:status}),
+                        data:JSON.stringify({id:id,productname:productname,envtest:envtest,envpro:envpro,status:status}),
                         dataType:'text',
                         success:function(data){
                             var msg ;

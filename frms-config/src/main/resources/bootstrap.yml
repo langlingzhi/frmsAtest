@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+#    include: native
+  application:
+    name: frms-config
+server:
+  port: 8888
+
+#encrypt:
+#  key-store:
+#    location: classpath:/META-INF/server.jks
+#    password: ppfstore
+#    alias: porterkey
+#    secret: ppfkey
+
+
+logging:
+  path: ../logs/

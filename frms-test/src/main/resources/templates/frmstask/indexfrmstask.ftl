@@ -98,7 +98,7 @@
             var id = data.id;
             var productid = data.productid;
 
-            if (obj.event === 'del') {//删除产品
+            if (obj.event === 'del') {//删除测试任务
                 layer.confirm('确定删除么', function (index) {
                     //数据库删除
                     $.ajax({
@@ -124,7 +124,7 @@
                         }
                     })
                 });
-            } else if (obj.event === 'edit') {//编辑产品信息
+            } else if (obj.event === 'edit') {//编辑测试任务
                 layer.open({
                     type: 2
                     , title: '修改任务信息'
@@ -143,7 +143,7 @@
                     }
                 })
             }
-            else if (obj.event === 'run') {//编辑产品信息
+            else if (obj.event === 'run') {//运行测试用例
                 layer.confirm('确定运行么', function (index) {
                     //数据库删除
                     $.ajax({
@@ -153,6 +153,45 @@
                             var msg;
                             if (data == 'success') {
                                 msg = "运行成功！";
+                                <#--layer.open({-->
+                                    <#--type: 2-->
+                                    <#--, title: '测试结果'-->
+                                    <#--, area: ['450px', '490px']-->
+                                    <#--//,btn: ['关闭']-->
+                                    <#--, content: '${base}/frmsTask/toFrmsTaskrunResult'-->
+                                    <#--, cancel: function (index) {-->
+                                        <#--//阻止弹框右上角x掉弹框-->
+                                    <#--}-->
+                                    <#--, btn2: function (index, layero) {-->
+
+                                    <#--}-->
+                                    <#--, end: function () {-->
+                                        <#--//只要窗口关闭都会执行end回调-->
+                                        <#--init();-->
+                                    <#--}-->
+                                <#--})-->
+                                layer.open({
+                                    type:2
+//                    ,title: '详细报告'
+                                    ,area:['1600px','550px']
+                                    ,btn: ['关闭']
+                                    ,content:'${base}/frmsReport/toTable'
+                                    ,cancel: function(index){
+                                        //阻止弹框右上角x掉弹框
+                                    }
+                                    ,btn2:function(index, layero){
+
+                                    }
+                                    ,end:function(){
+                                        //只要窗口关闭都会执行end回调
+                                        init();
+                                    }
+                                })
+
+//                                $('#divtest').attr("hidden","");
+//                                $('#divtest').attr("hidden","hidden");
+                                //在要隐藏div添加如下属性id="divtest" hidden="hidden"，根据传得参数让某个属性隐藏或者显示
+                                //layer.open 打开某个窗口
                             } else if (data == 'exists') {
                                 msg = "运行失败！";
                             } else if (data == 'false') {
@@ -202,7 +241,7 @@
     <div class="col-sm-12" style="padding-bottom: 15px;"></div>
     <div class="col-sm-12" style="padding-bottom: 15px;">
         <form class="form-inline" onsubmit="return false;">
-            <div class="form-group ml30">
+            <div class="form-group ml30" >
                 <label for="exampleInputName2">产品:</label>
                 <select id="productid" class="form-control ml10" style="width: 160px">
                     <option value="">--请选择--</option>

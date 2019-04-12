@@ -57,7 +57,7 @@
                             {checkbox: true, LAY_CHECKED: false} //
                             , {field: 'id', title: '接口编号', width: 150, sort: true}
                             , {field: 'apiName', title: '接口名称', width: 150}
-                            , {field: 'productId', title: '所属产品', width: 100}
+                            , {field: 'productname', title: '所属产品', width: 100}
                             , {field: 'path', title: '请求路径', width: 200}
                             , {field: 'status', title: '是否执行', width: 100}
                             , {field: 'update_time', title: '更新时间', width: 200}
@@ -191,7 +191,7 @@
             <form class="form-inline" onsubmit="return false;">
                 <div class="form-group ml30">
                     <label for="exampleInputName2">接口名称</label>
-                    <input type="text" class="form-control ml10" id="name" placeholder="请输入接口名称">
+                    <input type="text" class="form-control ml10" id="apiName" placeholder="请输入接口名称">
                 </div>
                 <div class="form-group ml30">
                     <label for="exampleInputName2">是否执行</label>

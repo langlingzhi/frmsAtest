@@ -3,6 +3,7 @@ package com.nuanshui.frms.test.controller.frmsapi;
 import com.nuanshui.frms.test.command.example.FrmsapiCmd;
 import com.nuanshui.frms.test.csservice.FrmsEnvService;
 import com.nuanshui.frms.test.csservice.FrmsapiService;
+import com.nuanshui.frms.test.entity.cs.FrmsEnv;
 import com.nuanshui.frms.test.entity.cs.Frmsapi;
 import com.nuanshui.frms.test.entity.cs.system.FrmsUser;
 import org.slf4j.Logger;
@@ -113,7 +114,10 @@ public class FrmsapiController {
 
     @RequestMapping({"/toFrmsApiTest"})
     public String toFrmsApiTest(Integer id, Model model) {
-        model.addAttribute("frmsapi", frmsapiService.selectByPrimaryKey(id));
+        Frmsapi frmsapi=frmsapiService.selectByPrimaryKey(id);
+        FrmsEnv frmsEnv = frmsEnvService.selectByPrimaryKey(frmsapi.getProductId());
+        frmsapi.setPath(frmsEnv.getEnvtest() + frmsapi.getPath());
+        model.addAttribute("frmsapi",frmsapi);
         model.addAttribute("productIds", frmsEnvService.selectAllProduct());
         return "/frmsapi/frmsapitest";
     }
@@ -134,16 +138,16 @@ public class FrmsapiController {
 
     @RequestMapping(value = {"/frmsApiTest"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
     @ResponseBody
-    public String frmsApiTest(@RequestBody Frmsapi frmsapi) {
-        String msg;
+    public Frmsapi frmsApiTest(@RequestBody Frmsapi frmsapi,Model model) {
+        Frmsapi frmsapi1 =new Frmsapi();
         try {
-            msg = this.frmsapiService.frmsapitest(frmsapi);
+            frmsapi1 = this.frmsapiService.frmsapitest(frmsapi);
+            model.addAttribute("frmsapi",frmsapi1);
         } catch (Exception e) {
 //            String msg;
             log.error("FrmsapiController frmsApiTest ERROR", e);
-            msg = "false";
         }
-        return msg;
+        return frmsapi1;
     }
 }
 

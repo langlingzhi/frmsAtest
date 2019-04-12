@@ -1,0 +1,22 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host}:8761/eureka/
+#      defaultZone: http://${cloud.eureka.host}:8761/eureka/,http://${cloud.eureka.host2}:8761/eureka/
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: C:/deploy/test/git-config
+#            repos:
+#              local: file://C:/deploy/test/git-config
+#          uri: file:////opt/oracle/tomcat/frms/git-config
+
+logging:
+  path: /opt/oracle/tomcat/frms/logs/
+
+cloud:
+  eureka:
+    host: 127.0.0.1

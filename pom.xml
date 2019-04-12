@@ -9,6 +9,7 @@
     <description>frms-test-parent</description>
 
 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -19,18 +20,6 @@
         <spring-cloud.version>Dalston.SR1</spring-cloud.version>
         <hibernate-validator.version>5.2.2.Final</hibernate-validator.version>
         <org.apache.shiro-version>1.2.4</org.apache.shiro-version>
-
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- Sonar -->
-        <!-- The destination file for the code coverage report has to be set to the same value
-             in the parent pom and in each module pom. Then JaCoCo will add up information in
-             the same report, so that, it will give the cross-module code coverage. -->
-        <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-        <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
-
     </properties>
 
     <repositories>
@@ -96,9 +85,9 @@
                 <scope>import</scope>
             </dependency>
             <!--<dependency>-->
-            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-            <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-            <!--<version>1.0.0.Final</version>-->
+                <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+                <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
+                <!--<version>1.0.0.Final</version>-->
             <!--</dependency>-->
             <dependency>
                 <groupId>commons-io</groupId>
@@ -159,18 +148,37 @@
 
     <modules>
         <module>frms-test</module>
+        <module>frms-config</module>
+        <module>frms-eureka</module>
         <module>frms-test-api</module>
     </modules>
     <build>
-        <defaultGoal>compile</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.3</version>
+            </plugin>
         </plugins>
     </build>
-
-    <!-- 代码质量检测 -->
-
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <!-- select non-aggregate reports -->
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

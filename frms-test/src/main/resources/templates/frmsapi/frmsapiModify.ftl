@@ -112,8 +112,8 @@
             <label class="layui-form-label">状态：<span style="color:red;">*</span></label>
             <div class="layui-input-inline">
                 <select name="status" id="status" class="layui-select" lay-verify="required">
-                    <option value='0'<#if frmsapi.status ==0>selected</#if>>不执行</option>
-                    <option value='1'<#if frmsapi.status ==1>selected</#if>>执行</option>
+                    <option value="0"<#if frmsapi.status =='0'>selected</#if>>不执行</option>
+                    <option value="1"<#if frmsapi.status =='1'>selected</#if>>执行</option>
                 </select>
             </div>
         </div>

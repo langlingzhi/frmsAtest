@@ -13,8 +13,6 @@
     <property name="email_subject" value="【${projectName}生产engine出现异常预警】，请及时查看服务器状态-LOGBACK- %logger" />
     <property name="smtpPort" value="465" />
 
-
-
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>

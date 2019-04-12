@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: frms-eureka
+server:
+  port: 8761
+
+logging:
+  path: ../logs/

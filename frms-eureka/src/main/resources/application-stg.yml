@@ -1,0 +1,7 @@
+eureka:
+  instance:
+    hostname: ${cloud.eureka.host}
+    prefer-ip-address: true
+
+logging:
+  path: /usr/local/frms/logs/

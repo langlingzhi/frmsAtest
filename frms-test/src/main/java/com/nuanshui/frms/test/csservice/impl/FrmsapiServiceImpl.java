@@ -7,8 +7,8 @@ import com.nuanshui.frms.test.csservice.FrmsapiService;
 import com.nuanshui.frms.test.entity.cs.FrmsEnv;
 import com.nuanshui.frms.test.entity.cs.Frmsapi;
 import com.nuanshui.frms.test.utils.http.RequestUtil;
+import io.restassured.response.ValidatableResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,58 +58,41 @@ public class FrmsapiServiceImpl implements FrmsapiService {
     }
 
     @Override
-    public String frmsapitest(Frmsapi frmsapi) {
+    public Frmsapi frmsapitest(Frmsapi frmsapi) {
 
-        String msg ="";
-        Response response = null;
+
+
         try {
-            if (frmsapi.getMethod().equals("get")) {
-                FrmsEnv frmsEnv = frmsEnvService.selectByPrimaryKey(frmsapi.getProductId());
-                response = (Response) RequestUtil.sendgetWithHttp(frmsEnv.getEnvtest() + frmsapi.getPath(), frmsapi.getBody());
-                if (response.getStatusCode() == 200) {
-                    try {
+            if (frmsapi.getReqType().equals("http")) {
+
+                if (frmsapi.getMethod().equals("get")) {
+                    Response response = (Response) RequestUtil.sendgetWithHttp( frmsapi.getPath(), frmsapi.getBody());
                         frmsapi.setSusResponse(response.getBody().prettyPrint());
-                        frmsapiMapper.updatefrmsapi(frmsapi);
-                    }catch (Exception e){
-                        log.info(MarkerFactory.getMarker("frmsapi存库"), "异常【{}】", e);
-                    }
-                    msg="success";
-                } else {
-                    try{
                         frmsapi.setFalResponse(String.valueOf(response.getStatusCode()));
-                        frmsapiMapper.updatefrmsapi(frmsapi);
-                    }catch (Exception e){
-                        log.info(MarkerFactory.getMarker("frmsapi存库"), "异常【{}】", e);
-                    }
-                    msg="failed";
+
+                } else {
+                    Response response = (Response) RequestUtil.sendpostWithHttp(frmsapi.getPath(), frmsapi.getBody());
+                    frmsapi.setSusResponse(response.getBody().prettyPrint());
+                    frmsapi.setFalResponse(String.valueOf(response.getStatusCode()));
                 }
             }
-            if (frmsapi.getMethod().equals("post") ) {
-                FrmsEnv frmsEnv = frmsEnvService.selectByPrimaryKey(frmsapi.getProductId());
-                response = (Response) RequestUtil.sendpostWithHttp(frmsEnv.getEnvtest() + frmsapi.getPath(), frmsapi.getBody());
-                if (response.getStatusCode() == 200) {
-                    try{
-                        frmsapi.setSusResponse(response.getBody().prettyPrint());
-                        frmsapiMapper.updatefrmsapi(frmsapi);
-                    }catch (Exception e){
-                        log.info(MarkerFactory.getMarker("frmsapi存库"), "异常【{}】", e);
-                    }
-                    msg="success";
+            if (frmsapi.getReqType().equals("https") ) {
+
+                if (frmsapi.getMethod().equals("get")) {
+                    Response response = (Response) RequestUtil.sendgetWithHttps( frmsapi.getPath(), frmsapi.getBody());
+                    frmsapi.setSusResponse(response.getBody().prettyPrint());
+                    frmsapi.setFalResponse(String.valueOf(response.getStatusCode()));
 
                 } else {
-                    try{
-                        frmsapi.setFalResponse(String.valueOf(response.getStatusCode()));
-                        frmsapiMapper.updatefrmsapi(frmsapi);
-                    }catch (Exception e){
-                        log.info(MarkerFactory.getMarker("frmsapi存库"), "异常【{}】", e);
-                    }
-                    msg="failed";
+                    Response response = (Response) RequestUtil.sendpostWithHttps(frmsapi.getPath(), frmsapi.getBody());
+                    frmsapi.setSusResponse(response.getBody().prettyPrint());
+                    frmsapi.setFalResponse(String.valueOf(response.getStatusCode()));
                 }
             }
         }catch (Exception e){
-            log.error("", e);
+            log.error("FrmsapiServiceImpl.frmsapitest", e);
         }
-        return msg;
+        return frmsapi;
     }
 
     @Override

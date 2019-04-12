@@ -36,7 +36,7 @@
                         success: function (data) {
                             var msg;
                             if (data == 'success') {
-                                msg = '添加成功!';
+                                msg = '添加成功!  ';
                             } else if (data == 'exists') {
                                 msg = '添加失败!';
                             } else {

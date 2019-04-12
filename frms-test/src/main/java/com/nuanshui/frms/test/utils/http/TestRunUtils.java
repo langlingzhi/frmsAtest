@@ -21,7 +21,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class TestRunUtils {
 
     private static final Logger log = LoggerFactory.getLogger(TestRunUtils.class);
-
+//运行测试suit
     public static ReportInfo scrawtestcase(String surl, String sbody,String Method,String ReqType, List<FrmsVparam> fvs) {
         String msg = null;
         ReportInfo reportInfo = new ReportInfo();

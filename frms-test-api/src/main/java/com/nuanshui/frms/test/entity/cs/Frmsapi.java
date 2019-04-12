@@ -16,7 +16,8 @@ public class Frmsapi implements Serializable {
     private Integer id;
     private String apiName;
     private Integer productId;
-    private Integer status;
+    private String productname;
+    private String status;
     private String reqType;
     private String method;
     private String path;

@@ -64,12 +64,12 @@
                            data-index="5">日志管理</a>
                     </li>
                 </ul>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="/frmsReport/toTable"
-                           data-index="6">报告</a>
-                    </li>
-                </ul>
+                <#--<ul class="nav nav-second-level">-->
+                    <#--<li>-->
+                        <#--<a class="J_menuItem" href="/frmsReport/toTable"-->
+                           <#--data-index="6">报告</a>-->
+                    <#--</li>-->
+                <#--</ul>-->
             </li>
             <li>
                 <a href="#">

@@ -25,6 +25,6 @@ public class FrmsReport implements Serializable {
     private Date beginTime;
     private String totalTime;
     private String testResult;
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String create_time;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date create_time;
 }

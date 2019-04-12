@@ -18,7 +18,7 @@
 //                var protocol = document.getElementById("protocol").value;
                 var status = document.getElementById("status").value;
 
-                if(productname != "" && envtest!="" && protocol!=""  && status!="" ){
+                if(productname != "" && envtest!=""   && status!="" ){
                     //不能重复点击
                     $("#addButton").attr("class","layui-btn layui-btn-disabled");
                     $("#addButton").attr("lay-filter","addButton");
@@ -28,7 +28,7 @@
                         async:'true',
                         type:'post',
                         contentType:'application/json',
-                        data:JSON.stringify({productname:productname,envtest:envtest,envpro:envpro,protocol:protocol,status:status}),
+                        data:JSON.stringify({productname:productname,envtest:envtest,envpro:envpro,status:status}),
                         dataType:'text',
                         success:function(data){
                             var msg ;

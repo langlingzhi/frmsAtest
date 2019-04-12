@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    hostname: ${cloud.eureka.host}
+    prefer-ip-address: true
+
+cloud:
+  eureka:
+    host: 127.0.0.1
+
+logging:
+  path: C:\logs\

@@ -1,0 +1,14 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host}:8761/eureka/,http://${cloud.eureka.host2}:8761/eureka/
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:////home/cv_onlas/frms/git-config
+# spring.cloud.config.server.native.search-locations=file:/opt/tomcat/frms/git-config
+logging:
+  path: ../logs/

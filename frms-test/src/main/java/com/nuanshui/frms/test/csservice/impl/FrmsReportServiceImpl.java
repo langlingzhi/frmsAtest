@@ -10,6 +10,7 @@ import com.nuanshui.frms.test.utils.JacksonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,8 @@ public class FrmsReportServiceImpl implements FrmsReportService {
         frmsReport.setTestSkip(reportData.getTestSkip());
         frmsReport.setTestName(reportData.getTestName());
         frmsReport.setTestResult(JacksonUtils.serialObject(reportData));
+        Date date = new Date();
+        frmsReport.setCreate_time(date);
         return frmsReportMapper.insertfrmsreport(frmsReport);
     }
 

@@ -150,5 +150,9 @@ public class FrmsTaskController {
         }
         return msg;
     }
+    @RequestMapping({"/toFrmsTaskrunResult"})
+    public String toFrmsTaskrunresult( Model model) {
+        return "/frmstask/frmstaskrunresult";
+    }
 
 }

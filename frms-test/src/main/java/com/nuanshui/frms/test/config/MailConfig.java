@@ -27,7 +27,7 @@ public class MailConfig
     @Value("${spring.mail.password}")
     private String mailPassword;
     @Value("${spring.mail.mailTemplate}")
-    private String mailTemplate;
+    private String mailTemplate;//邮件模板
     @Value("${spring.mail.to}")
     private String to;
     @Value("${spring.mail.subject}")

@@ -21,45 +21,37 @@ public class FrmsEnvController {
     private static final Logger log = LoggerFactory.getLogger(FrmsapiController.class);
     @Autowired
     private FrmsEnvService frmsEnvService;
+
     @RequestMapping({"/getQryFrmsEnv"})
-    public String getQryFrmsApiList()
-    {
+    public String getQryFrmsApiList() {
         return "/frmsenv/indexfrmsenv";
     }
 
-    @RequestMapping(value={"/qryFrmsEnvList"}, method= RequestMethod.POST)
+    @RequestMapping(value = {"/qryFrmsEnvList"}, method = RequestMethod.POST)
     @ResponseBody
-    public List<FrmsEnv> qryFrmsEnvList(@RequestBody FrmsEnvCmd frmsEnvCmd)
-    {
+    public List<FrmsEnv> qryFrmsEnvList(@RequestBody FrmsEnvCmd frmsEnvCmd) {
         List<FrmsEnv> frmsenvs = null;
-        try
-        {
+        try {
             frmsenvs = this.frmsEnvService.selectfrmsenv(frmsEnvCmd);
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             log.error("FrmsEnvController qryFrmsEnvList ERROR", e);
         }
         return frmsenvs;
     }
 
     @RequestMapping({"/toaddFrmsEnv"})
-    public String toaddFrmsEnv()
-    {
+    public String toaddFrmsEnv() {
         return "/frmsenv/addfrmsenv";
     }
 
-    @RequestMapping(value={"/addFrmsEnv"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
+    @RequestMapping(value = {"/addFrmsEnv"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
     @ResponseBody
-    public String addFrmsEnv(@RequestBody FrmsEnv frmsEnv)
-    {
+    public String addFrmsEnv(@RequestBody FrmsEnv frmsEnv) {
         String msg;
-        try
-        {
+        try {
             msg = this.frmsEnvService.insertfrmsenv(frmsEnv) == 0 ? "exists" : "success";
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 //            String msg;
             log.error("FrmsEnvController addFrmsEnv ERROR", e);
             msg = "false";
@@ -67,18 +59,14 @@ public class FrmsEnvController {
         return msg;
     }
 
-    @RequestMapping(value={"/delFrmsEnv"})
+    @RequestMapping(value = {"/delFrmsEnv"})
     @ResponseBody
-    public String delFrmsEnv(String id)
-    {
+    public String delFrmsEnv(String id) {
 
         String msg;
-        try
-        {
+        try {
             msg = this.frmsEnvService.deletefrmsenv(Integer.parseInt(id)) == 0 ? "exists" : "success";
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 //            String msg;
             log.error("FrmsEnvController delFrmsEnv ERROR", e);
             msg = "false";
@@ -87,23 +75,18 @@ public class FrmsEnvController {
     }
 
     @RequestMapping({"/toFrmsEnvModify"})
-    public String todelFrmsEnvModify(Integer id, Model model)
-    {
+    public String todelFrmsEnvModify(Integer id, Model model) {
         model.addAttribute("frmsenv", frmsEnvService.selectByPrimaryKey(id));
         return "/frmsenv/frmsenvModify";
     }
 
-    @RequestMapping(value={"/frmsEnvModify"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
+    @RequestMapping(value = {"/frmsEnvModify"}, method = {org.springframework.web.bind.annotation.RequestMethod.POST})
     @ResponseBody
-    public String frmsEnvModify(@RequestBody FrmsEnv frmsEnv)
-    {
+    public String frmsEnvModify(@RequestBody FrmsEnv frmsEnv) {
         String msg;
-        try
-        {
+        try {
             msg = this.frmsEnvService.updatefrmsenv(frmsEnv) == 0 ? "exists" : "success";
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 //            String msg;
             log.error("FrmsEnvController frmsEnvModify ERROR", e);
             msg = "false";

@@ -332,7 +332,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">用例参数</label>
         <div class="layui-input-block">
-            <textarea name="requestparam" required lay-verify="required"
+            <textarea name="requestparam" required lay-verify="required" value="${requestparam?if_exists}"
                       class="layui-textarea"></textarea>
         </div>
     </div>

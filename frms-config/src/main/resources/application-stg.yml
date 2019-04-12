@@ -1,0 +1,17 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host}:8761/eureka/
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+           username: llz
+           password: 123456
+           uri: https://github.com/langlingzhi/frms-config.git
+           basedir: /usr/local/porter/porter-config/git_dir
+
+logging:
+  path: /usr/local/frms/logs/

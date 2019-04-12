@@ -49,7 +49,7 @@ public class ScheduledJob implements Job {
             mail.setTo(frmsTask.getEmail());
             mail.setSubject("接口自动化定时任务_测试报告");
             mail.setCcList("lianglingzhi@heatedloan.com");
-            mail.setTemplate("report.ftl");
+            mail.setTemplate("report.ftl");//邮件模板样式
             mailService.sendFreemarker(mail, repid);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

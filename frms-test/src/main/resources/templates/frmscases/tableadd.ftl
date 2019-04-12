@@ -20,126 +20,46 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <script type="text/javascript">
 
-        layui.use(['form', 'table', 'layer', 'layedit', 'jquery', 'laydate'], function () {
-
-            var $ = layui.$
-                    , form = layui.form
-                    , table = layui.table
+        layui.use(['form', 'layer', 'layedit', 'element'], function () {
+            var element = layui.element;
+            var form = layui.form
                     , layer = layui.layer
-                    , layedit = layui.layedit
-                    , laydate = layui.laydate;
+                    , layedit = layui.layedit;
+            var editIndex = layedit.build('LAY_demo_editor');
 
-            //定义事件集合
             form.on('submit(*)', function (data) {
-                var reqType = document.getElementById("reqType").value;
-                var method = document.getElementById("method").value;
+                var reqType = document.getElementById("productId").value;
+                var method = document.getElementById("status").value;
                 var path = $("input[name='path']").val();
                 var body = $("textarea[name='body']").val();
 
-                //不能重复点击
-                $("#runbutton").attr("class", "layui-btn layui-btn-disabled");
-                $("#runbutton").attr("lay-filter", "runbutton");
-                //提交表单
 
-                $.ajax({
-                    url: '${base}/frmsRun/totestcases',
-                    async: 'true',
-                    type: 'post',
-                    contentType: 'application/json',
-                    data: JSON.stringify({reqType: reqType, method: method, path: path, body: body}),
-                    dataType: 'json',
-                    success: function (data) {
-                        document.getElementById("jsonResult").innerHTML = JSON.stringify(data.response);
-                        document.getElementById("reqType").innerHTML = JSON.stringify(data.reqType);	//使用JSON.stringify()格式化输出JSON字符串
 
-                        document.getElementById("method").innerHTML = JSON.stringify(data.method);	//使用JSON.stringify()格式化输出JSON字符串
+                if (reqType != "" && method != "" && path != "") {
+                    $.ajax({
+                        url: '${base}/frmsRun/totestcases',
+                        async: 'true',
+                        type: 'post',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            reqType: reqType,
+                            method: method,
+                            path: path,
+                            body: body
+                        }),
+                        dataType: 'text',
+                        success: function (data) {
+                            $.ajax({
+                                url: '${base}/frmsRun/toTableAdd'
+                            })
 
-                        $("input[name='path']").innerHTML = JSON.stringify(data.path);	//使用JSON.stringify()格式化输出JSON字符串
 
-                        $("textarea[name='body']").innerHTML = JSON.stringify(data.body);	//使用JSON.stringify()格式化输出JSON字符串
-
-//使用JSON.stringify()格式化输出JSON字符串
-                    }
+            }
                 })
 
-
-
-            });
-            var active = {
-                        save: function () {	//保存
-
-                            //这里是保存结果输出
-                            document.getElementById("jsonResult").innerHTML = JSON.stringify(rows, null, 2);	//使用JSON.stringify()格式化输出JSON字符串
-//                    tableIns.reload({data: []});	//表格数据置空
-
-//                    to do more：            //将 rows 传给服务端进行保存或更新
-
-
-                        }
-                    }
-
-//        //激活事件的通用调用方法
-//        var activeByType = function (type, arg) {
-//            active[type] ? (arguments.length === 2 ? active[type].call(this, arg) : active[type].call(this)) : '';
-//        }
-//
-//        //注册按钮事件
-//        $('.layui-btn[data-type]').on('click', function () {
-//            var type = $(this).data('type');
-//            activeByType(type);
-//        });
-
-                    //监听工具条
-//        table.on('tool(dataTable)', function (obj) {
-//            var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
-//            //console.log(data);
-//            switch (event) {
-//                case "type":
-//                    var select = tr.find("select[name='type']");
-//                    if (select) {
-//                        var selectedVal = select.val();
-//                        if (!selectedVal) {
-//                            layer.tips("请选择一个分类", select.next('.layui-form-select'), {tips: [3, '#FF5722']}); //吸附提示
-//                        }
-//                        console.log('selected value of type is: ', selectedVal);
-//                        $.extend(data, {'type': selectedVal});
-//                        activeByType('updateRow', data);	//更新行记录对象
-//                        form.render('select');	//更新select下拉选择框渲染
-//                    }
-//                    break;
-//                case "state":
-//                    var stateVal = tr.find("input[name='state']").prop('checked') ? 1 : 0;
-//                    $.extend(data, {'state': stateVal})
-//                    activeByType('updateRow', data);	//更新行记录对象
-//                    break;
-//                case "remark":
-//                    var oldRemark = data.remark || '';
-//
-//                    //弹出输入框
-//                    layer.prompt({
-//                        formType: 2,	//输入框类型，支持0（文本）默认1（密码）2（多行文本）
-//                        value: oldRemark,
-//                        title: '请填写备注',
-//                        area: ['512px', '128px'] //自定义文本域宽高
-//                    }, function (value, index, elem) {
-//                        var loadInx = layer.load(1);
-//                        //console.log(value); //得到value
-//                        layer.close(index);	//关闭 prompt
-//                        $.extend(data, {'remark': value})	//更新 data 的指定属性值
-//                        activeByType('updateRow', data);	//更新行记录对象
-//                        layer.close(loadInx);	//关闭 load
-//                    });
-//                    break;
-//                case "del":
-//                    layer.confirm('真的删除行吗？', function (index) {
-//                        layer.close(index);
-//                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-//                        activeByType('removeEmptyRow');
-//                    });
-//                    break;
-//            }
-//        });
-    })
+        }
+            })
+        })
 
     </script>
 
@@ -156,7 +76,6 @@
                 </select>
             </div>
             <div class="layui-input-inline" style="width: 80px">
-
                 <select name="method" id="method" class="layui-select" lay-verify="required">
                     <option value="get">GRT</option>
                     <option value="post" selected>POST</option>
@@ -179,27 +98,36 @@
                         <textarea name="body" placeholder="" class="layui-textarea"
                                   style="width: 500px"></textarea>
         </div>
-    <div class="layui-card">
-    <div class="layui-card">
-        <div class="layui-card-header">Response设置:</div>
-        <div class="layui-card-body layui-text">
-            <blockquote class="layui-elem-quote layui-quote-nm">
-                <pre id="jsonResult"><span class="layui-word-aux">请点击“运行”查看Response……</span></pre>
-            </blockquote>
-        </div>
-    </div>
 
-<#--<label class="layui-form-label">body:<span style="color:red;">*</span></label>-->
-<#--<div class="layui-input-block">-->
-<#--<textarea name="susResponse" placeholder="" class="layui-textarea"-->
-<#--style="width: 500px">${frmsapi.susResponse?if_exists}</textarea>-->
-<#--</div>-->
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="*" id="runbutton">运行</button>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend><span style="color:green;">|</span>
+                Response:
+            </legend>
+        </fieldset>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">code：<span style="color:red;">*</span></label>
+            <div class="layui-input-inline">
+                <input name="falResponse" id="falResponse" type="text" autocomplete="off"
+                       class="layui-input" >
+            <#--value="${frmsapi.falResponse?if_exists}"-->
+
+
+            </div>
         </div>
-    </div>
+        <div class="layui-form-item" style="margin-top: 20px">
+            <label class="layui-form-label">body:<span style="color:red;">*</span></label>
+            <div class="layui-input-block">
+                        <textarea name="susResponse" id="susResponse" placeholder="" class="layui-textarea"
+                                  style="width: 500px" ></textarea>
+            <#--${frmsapi.susResponse?if_exists}-->
+            </div>
+        </div>
     </form>
-
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-top: 20px">
+            <button class="layui-btn" lay-submit lay-filter="*" id="runbutton">运行</button>
+        <#--<button  class="layui-btn layui-btn-primary" lay-filter="*" id="testButton">调试</button>-->
+        </div>
 </body>
 </html>

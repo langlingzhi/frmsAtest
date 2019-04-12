@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import java.util.Date;
 import java.util.List;
 @Controller
 @RequestMapping({"/frmsRun"})
@@ -54,7 +55,6 @@ public class RunController  {
     @RequestMapping({"/toTable"})
     public String toTable( Model model)
     {
-
         return "/frmscases/table";
     }
     @RequestMapping({"/toTableAdd"})
@@ -64,18 +64,19 @@ public class RunController  {
     }
 
     @RequestMapping(value={"/totestcases"},method= RequestMethod.POST)
-    public FrmsTest toTableAdd(@RequestBody FrmsTest frmsTest)
+    public FrmsTest toTableAdd(@RequestBody FrmsTest frmsTest,Model model)
     {
-        FrmsTest frmsTest1=new FrmsTest();
+        FrmsTest frmstest=new FrmsTest();
         try
         {
-            frmsTest1=TestRunUtils.testcases(frmsTest);
+            frmstest=TestRunUtils.testcases(frmsTest);
+            model.addAttribute("frmstest", frmstest);
         }
         catch (Exception e)
         {
             log.error("FrmsCaserunController totestcases ERROR", e);
         }
-        return frmsTest1;
+        return frmstest;
     }
     @RequestMapping(value = {"/runFrmsTask"})
     @ResponseBody
@@ -87,6 +88,7 @@ public class RunController  {
             ReportData reportData=new ReportData();
             reportData=this.frmsRunService.runfrmstask(Integer.parseInt(productid));
             frmsReportService.insertfrmsreport(reportData);
+            ReportUtils.makereports(reportData);
             msg="success";
         } catch (Exception e) {
 //            String msg;

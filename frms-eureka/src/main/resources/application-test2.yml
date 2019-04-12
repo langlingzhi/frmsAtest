@@ -1,0 +1,10 @@
+eureka:
+  instance:
+    hostname: ${cloud.eureka.host2}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host}:${server.port}/eureka/
+
+logging:
+  path: /usr/local/frms/logs/

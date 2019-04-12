@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <springProperty scope="context" name="projectName" source="spring.application.name" defaultValue="log"/>
+    <springProperty scope="context" name="logPath" source="logging.path" defaultValue="log"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <!--local 日志配置 -->
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${logPath}${projectName}.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${logPath}${projectName}zip\${projectName}.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+    <springProfile name="test,dev,local">
+        <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+            <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+            <encoder>
+                <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        </springProfile>
+
+        <!-- TRICK! but I don't want to reset default ExceptionResolver! see AbstractHandlerExceptionResolver.setWarnLogCategory -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
+        <root level="info">
+            <appender-ref ref="file"/>
+            <springProfile name="test,dev,local">
+                <appender-ref ref="stdout"/>
+            </springProfile>
+        </root>
+</configuration>

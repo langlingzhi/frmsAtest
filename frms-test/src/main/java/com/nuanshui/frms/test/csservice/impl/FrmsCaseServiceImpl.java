@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,8 +73,8 @@ public class FrmsCaseServiceImpl implements FrmsCaseService{
     @Override
     public int updatefrmscase(FrmsCase frmscase) {
         Date date=new Date();
-        frmscase.setCreate_time((java.sql.Date) date);
-        frmscase.setUpdate_time((java.sql.Date) date);
+        frmscase.setCreate_time( date);
+        frmscase.setUpdate_time( date);
         return frmsCaseMapper.updatefrmscase(frmscase);
     }
 
@@ -87,7 +88,7 @@ public class FrmsCaseServiceImpl implements FrmsCaseService{
         url=frmsEnv.getEnvtest()+frmsapi.getPath();
         frmsCase= TestRunUtils.testcase(url,frmsCase,fv);
         Date date=new Date();
-        frmsCase.setUpdate_time((java.sql.Date) date);
+        frmsCase.setUpdate_time(date);
         return frmsCaseMapper.updatefrmscase(frmsCase);
     }
 
@@ -114,7 +115,7 @@ public class FrmsCaseServiceImpl implements FrmsCaseService{
             treeResponse.setCheckArr(jsonObject1.toString());
             FrmsapiCmd frmsapiCmd=new FrmsapiCmd();
             frmsapiCmd.setProductId(frmsEnv.getId());
-
+            frmsapiCmd.setStatus("1");
             List<Frmsapi> frmsapis=frmsapiService.selectfrmsapi(frmsapiCmd);
             if(frmsapis.isEmpty()){
                 continue;

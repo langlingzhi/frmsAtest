@@ -1,0 +1,10 @@
+eureka:
+  instance:
+    hostname: ${cloud.eureka.host}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${cloud.eureka.host2}:${server.port}/eureka/
+
+logging:
+  path: ../logs/

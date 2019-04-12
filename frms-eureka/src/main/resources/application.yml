@@ -1,0 +1,12 @@
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: false
+
+logging:
+  level:
+    root: info
+    com.unionpay: debug
+    org.apache: info

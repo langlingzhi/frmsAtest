@@ -1,0 +1,17 @@
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+  client:
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+logging:
+  level:
+    root: info
+    com.unionpay: debug
+    org.apache: info
+
+

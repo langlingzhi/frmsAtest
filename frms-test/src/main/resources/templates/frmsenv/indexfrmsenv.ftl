@@ -160,11 +160,11 @@
                     <input type="text" class="form-control ml10" id="name" placeholder="">
                 </div>
                 <div class="form-group ml30">
-                    <label for="exampleInputName2">是否执行</label>
+                    <label for="exampleInputName2">是否有效</label>
                     <select id="status" class="form-control ml10" style="width: 160px">
                         <option value="">请选择</option>
-                        <option value="1">执行</option>
-                        <option value="0">不执行</option>
+                        <option value="1">有效</option>
+                        <option value="0">无效</option>
                     </select>
                 </div>
                 <div class="form-group ml30">

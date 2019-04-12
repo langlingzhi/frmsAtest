@@ -18,5 +18,6 @@
     </select>
     <select id="selectByReportId" resultType="java.lang.Integer" parameterType="java.lang.String">
         select id from frms_report where reportId=#{reportId};
+
     </select>
 </mapper>

@@ -331,7 +331,7 @@
         <label class="layui-form-label">用例参数</label>
         <div class="layui-input-block">
             <textarea name="requestparam" required lay-verify="required" class="layui-textarea"
-                      autocomplete="off">${RequestParam?if_exists}</textarea>
+                      autocomplete="off">${frmscase.requestparam?if_exists}</textarea>
         </div>
     </div>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
@@ -361,8 +361,8 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">期待返回结果</label>
         <div class="layui-input-block">
-            <textarea name="expresponse" required lay-verify="required" class="layui-textarea"
-                      autocomplete="off">${frmscase.expresponse?if_exists}</textarea>
+            <textarea name="expresponse" required lay-verify="required" class="layui-textarea" value="${frmscase.expresponse?if_exists}"
+                      autocomplete="off"></textarea>
         </div>
     </div>
 </form>

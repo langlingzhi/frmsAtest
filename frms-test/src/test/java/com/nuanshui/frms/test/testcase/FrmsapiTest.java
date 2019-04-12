@@ -46,7 +46,16 @@ public class FrmsapiTest {
     @Test
     public void  gert(){
         System.out.println("========");
-    }
+        String [] dog=
+                {"1"};
+        String dogs[]={"a"};
+        String cats[] = new String[10];
+        for (int i=0;i<10;i++){
+            cats[i]="cat"+i;
+            System.out.println(cats[i]);
+        }
+   }
+
    /* public static void main(String args[]){
         Frmsapi frmsapi=new Frmsapi();
         frmsapi.setId((long) 5);

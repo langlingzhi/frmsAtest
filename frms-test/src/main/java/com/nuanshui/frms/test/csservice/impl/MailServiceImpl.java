@@ -66,7 +66,7 @@ public class MailServiceImpl implements MailService {
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setCc(mail.getCcList());
-            File file = ResourceUtils.getFile("classpath:templates/frmsreport/report.ftl");
+            File file = ResourceUtils.getFile("classpath:templates/frmsreport/report.ftl");//
             helper.addAttachment("report.html", file);
             FrmsReport frmsReport=frmsReportService.selectByPrimaryKey(id);
             System.out.println(frmsReport.toString());

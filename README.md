@@ -1,4 +1,4 @@
-## 一个java实现的简单接口测试平台
+## 一个java实现的简单接口测试平台（Atest）
 技术栈：springboot+restassured
 ## 功能介绍：
 支持在界面上进行http/https接口的增删改查和调试功能

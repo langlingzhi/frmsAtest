@@ -7,7 +7,7 @@
 - 支持定时执行，和运行完发测试报告邮件到指定邮箱；
 ## 环境
 准备idea+maven+git+jdk（1.8）的java开发环境，并且在idea中配置好git和maven
-##操作
+## 操作
 springboot支持以Application的方式启动（不同的模块有不同的application文件）,
 在idea中分别添加EurekaApplication，ConfigApplication，TestApplication，然后依次启动就能访问我们的接口测试平台了；
 ## 访问和使用

@@ -1,5 +1,5 @@
 # 一个java实现的简单接口测试平台（Atest）
-技术栈：springboot+restassured+springcloud
+技术栈：springboot+restassured++layui
 ## 功能介绍：
 - 支持在界面上进行http/https接口的增删改查和调试功能
 - 支持在界面上进行测试case的增删改查，简单断言，和调试功能

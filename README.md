@@ -16,6 +16,7 @@ TestApplication启动无误后，直接访问http://localhost:21300/     就能�
 ##### *frms-test为主要业务代码模块，frms-test-api为主要业务代码模块子模块，frms-eureka和frms-config分别为springcloud的注册中心和配置中心（无业务代码）
 ## 待优化
 - 支持复杂接口的请求（全局cookie，sign等参数的添加）
+- 支持复杂用例组织方式（参数化）
 - 支持jsonshcema校验
 - 支持验证数据库
 - 支持在线加解密

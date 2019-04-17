@@ -22,5 +22,5 @@ TestApplication启动无误后，直接访问http://localhost:21300/     就能�
 - 批量导入接口/测试用例
 - 待加+++++
 ##
-以上~对你有帮助的话，点个喜欢star吧～～
+以上~对你有帮助的话，点个star吧～～
 详细功能讲解介绍请见我的同名[简书](https://www.jianshu.com/p/c92e82a55b38)

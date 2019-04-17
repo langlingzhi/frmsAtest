@@ -10,9 +10,10 @@
 ## 操作
 springboot支持以Application的方式启动（不同的模块有不同的application文件）,
 在idea中分别添加EurekaApplication，ConfigApplication，TestApplication，然后依次启动就能访问我们的接口测试平台了；
+由于本平台采用的是springcloud微服务架构，需先依次先启动EurekaApplication和ConfigApplication；
 ## 访问和使用
 TestApplication启动无误后，直接访问http://localhost:21300/     就能访问该平台了
-如需使用自己的数据库，请先在frms-config项目中填写数据库地址，且新建数据库和表；
+如需使用自己的数据库，请先在frms-config项目中的配置文件填写数据库地址，且新建数据库和表；
 ##### *frms-test为主要业务代码模块，frms-test-api为主要业务代码模块子模块，frms-eureka和frms-config分别为springcloud的注册中心和配置中心（无业务代码）
 ## 待优化
 - 支持复杂接口的请求（全局cookie，sign等参数的添加）
